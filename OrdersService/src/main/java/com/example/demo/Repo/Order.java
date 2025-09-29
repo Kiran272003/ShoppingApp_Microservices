@@ -8,24 +8,43 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Order")
+@Table(name="Orders")
 public class Order {
-
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	@Column(name="CustomerName")
 	private String customerName;
-	@Column(name="Product")
-	private String product;
+	@Column(name="ProductId")
+	private Long productId;
+	
 	@Column(name="Quantity")
 	private int quantity;
+	
+	@Column(name="customerId")
+	private Long customerId;
+	
+	
 	public Order()
 	{
 		
 	}
-	
+
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
 	
 	public Long getId() {
 		return Id;
@@ -39,12 +58,7 @@ public class Order {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
-	public String getProduct() {
-		return product;
-	}
-	public void setProduct(String product) {
-		this.product = product;
-	}
+	
 	public int getQuantity() {
 		return quantity;
 	}

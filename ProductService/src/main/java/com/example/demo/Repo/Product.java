@@ -19,6 +19,14 @@ public class Product {
 	@Column(name="Quantity")
 	private String quantity;
 
+	@Column(name="Price")
+	private int price;
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	public Product()
 	{
 		
