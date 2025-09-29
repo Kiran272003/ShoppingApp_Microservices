@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # -------------------------------
 # Java / Spring Boot Projects
 # -------------------------------
@@ -8,10 +9,15 @@
 
 # Log files
 =======
+=======
+>>>>>>> 410c71d99d1e918e41cdc735040fdc3c2a52d55c
 # Compiled class file
 *.class
 
 # Log file
+<<<<<<< HEAD
+>>>>>>> 410c71d99d1e918e41cdc735040fdc3c2a52d55c
+=======
 >>>>>>> 410c71d99d1e918e41cdc735040fdc3c2a52d55c
 *.log
 
@@ -20,6 +26,7 @@
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 # -------------------------------
@@ -76,6 +83,10 @@ build/
 .metadata/
 # Package Files #
 >>>>>>> 410c71d99d1e918e41cdc735040fdc3c2a52d55c
+=======
+.metadata/
+# Package Files #
+>>>>>>> 410c71d99d1e918e41cdc735040fdc3c2a52d55c
 *.jar
 *.war
 *.nar
@@ -84,6 +95,7 @@ build/
 *.tar.gz
 *.rar
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # -------------------------------
 # OS files
@@ -94,6 +106,9 @@ Thumbs.db
 # -------------------------------
 # JVM crash logs
 # -------------------------------
+=======
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+>>>>>>> 410c71d99d1e918e41cdc735040fdc3c2a52d55c
 =======
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 >>>>>>> 410c71d99d1e918e41cdc735040fdc3c2a52d55c
