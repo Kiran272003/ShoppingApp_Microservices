@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # -------------------------------
 # Java / Spring Boot Projects
 # -------------------------------
@@ -6,6 +7,12 @@
 *.class
 
 # Log files
+=======
+# Compiled class file
+*.class
+
+# Log file
+>>>>>>> 410c71d99d1e918e41cdc735040fdc3c2a52d55c
 *.log
 
 # BlueJ files
@@ -13,6 +20,7 @@
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+<<<<<<< HEAD
 
 # -------------------------------
 # Eclipse / STS
@@ -64,6 +72,10 @@ build/
 # -------------------------------
 # Packages
 # -------------------------------
+=======
+.metadata/
+# Package Files #
+>>>>>>> 410c71d99d1e918e41cdc735040fdc3c2a52d55c
 *.jar
 *.war
 *.nar
@@ -72,6 +84,7 @@ build/
 *.tar.gz
 *.rar
 
+<<<<<<< HEAD
 # -------------------------------
 # OS files
 # -------------------------------
@@ -81,5 +94,8 @@ Thumbs.db
 # -------------------------------
 # JVM crash logs
 # -------------------------------
+=======
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+>>>>>>> 410c71d99d1e918e41cdc735040fdc3c2a52d55c
 hs_err_pid*
 replay_pid*
