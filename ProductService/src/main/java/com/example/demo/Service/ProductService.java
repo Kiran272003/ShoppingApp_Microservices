@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Exceptions.BadRequestException;
+import com.example.demo.Exceptions.ResourceNotFoundException;
 import com.example.demo.Repo.*;
 
 import jakarta.transaction.Transactional;
@@ -17,7 +19,7 @@ public class ProductService {
 	@Autowired
 	private ProductRepository productRepository;
 	
-	
+//-------------------------------------------------- Get All Products ---------------	
 	public List<Product> getAllProducts()
 	{
 		return productRepository.findAll();
@@ -25,11 +27,19 @@ public class ProductService {
 	
 	public Product addProduct(Product product)
 	{
+		if(product==null)
+		{
+			throw new BadRequestException("The Product can not be empty");
+		}
 		return productRepository.save(product);
 	}
 	
 	public String deleteProduct(Long id)
 	{
+		if(productRepository.findById(id) == null )
+		{
+			throw new ResourceNotFoundException("There is no Product with the given Id" + id);
+		}
 		productRepository.deleteById(id);
 		return "Delete Successful";
 	}
@@ -37,20 +47,21 @@ public class ProductService {
 	public Product getById(Long Id)
 	{
 		return productRepository.findById(Id)
-				.orElseThrow(()->new RuntimeException("Product not found with the id" + Id));
+				.orElseThrow(()->new ResourceNotFoundException("Product not found with the id" + Id));
 	}
 	
 	public Product updateProduct(Product product,Long pid)
 	{
 		Product pro = productRepository.findById(pid)
-				.orElseThrow(()-> new  RuntimeException("Product not found with the given ID"));
-		
-		pro.setProductname(product.getProductname());
-		pro.setQuantity(product.getQuantity());
+				.orElseThrow(()-> new  ResourceNotFoundException("Product not found with the given ID"));
+//		
+//		pro.setProductname(product.getProductname());
+//		pro.setQuantity(product.getQuantity());
+		productRepository.save(product);
 		return pro;
 	}
 	
-	public Integer getQtyById(Integer id)
+	public ProductQtyPriceDTO getQtyById(Integer id)
 	{
 		return productRepository.getQtyById(id);
 	}

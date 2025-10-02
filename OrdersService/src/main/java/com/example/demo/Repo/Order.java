@@ -24,7 +24,16 @@ public class Order {
 	@Column(name="customerId")
 	private Long customerId;
 	
-	
+	@Column(name="price")
+	private Integer orderPrice;
+	public Integer getOrderPrice() {
+		return orderPrice;
+	}
+
+	public void setOrderPrice(Integer orderPrice) {
+		this.orderPrice = orderPrice;
+	}
+
 	public Order()
 	{
 		

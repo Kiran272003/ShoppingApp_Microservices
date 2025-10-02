@@ -20,7 +20,7 @@ public class Customer {
 	@Column(name="CustomerEmail")
 	private String email;
 	
-	@Column(name="Addres")
+	@Column(name="Address")
 	private String address;
 	
 	public String getAddress() {

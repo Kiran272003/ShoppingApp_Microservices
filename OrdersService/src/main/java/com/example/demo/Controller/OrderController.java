@@ -25,11 +25,7 @@ public class OrderController {
 	
 	@Autowired
 	private RestTemplate restTemplate;
-//	@GetMapping("/stringOrder")
-//	public String stringOrder()
-//	{
-//		return "String type Orders";
-//	}
+
 	
 // ------------------------------------------------------ Get Orders ------------------
 	@GetMapping("/order")
@@ -42,10 +38,11 @@ public class OrderController {
 	@PostMapping("/addOrder")
 	public String addOrder(@RequestBody Order order)
 	{
-		Integer pQty = restTemplate.getForObject("http://ProductService/getQtyById?id={id}", Integer.class,order.getProductId());
-		if(order.getQuantity()<=pQty)
+		ProductQtyPriceDTO obj = restTemplate.getForObject("http://ProductService/getQtyById?id={id}", ProductQtyPriceDTO.class,order.getProductId());
+		if(order.getQuantity()<=obj.getQuantity())
 		{
 			restTemplate.postForObject("http://ProductService/updateQty?qty={qty}&id={id}",null, Integer.class, order.getQuantity(),order.getProductId());
+			order.setOrderPrice(order.getQuantity()*obj.getPrice());
 			orderService.addOrder(order);
 		}
 		else {

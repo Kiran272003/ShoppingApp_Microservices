@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,18 +51,16 @@ public class ProductController {
 	}
 	
 //---------------------------------------------------------Update Product-------------
-	@PostMapping("/updateProduct")
+	@PutMapping("/updateProduct")
 	public Product updateProduct(@RequestBody Product pro,@RequestParam("id") Long id)
 	{
-		return productService.updateProduct(pro, id);
-		
-		 
+		return productService.updateProduct(pro, id); 
 	}
 	
 	
 //--------------------------------------------------------Get qty by ID-------------
 	@GetMapping("/getQtyById")
-	public Integer getQtyById(@RequestParam("id") Integer id)
+	public ProductQtyPriceDTO getQtyById(@RequestParam("id") Integer id)
 	{
 		return productService.getQtyById(id);
 	}
