@@ -65,6 +65,14 @@ public class CustomerController {
 		 return "Order Placed Succefully";
 	}
 	
+//-------------------------------------- Delete Order ---------------------
+	
+	@DeleteMapping("/deleteOrder")
+	public String deleteOrder(@RequestParam("id") Long id)
+	{
+		 restTemplate.delete("http://OrdersService/deleteOrder?id={id}",id);
+		 return "Order deleted successful";
+	}
 //	----------------------------------------------------- Delete by Id--------------------------
 	@DeleteMapping("/deleteCustomer")
 	public String deleteCustomer(@RequestParam("deleteId") Long deleteId)

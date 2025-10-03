@@ -52,9 +52,9 @@ public class ProductController {
 	
 //---------------------------------------------------------Update Product-------------
 	@PutMapping("/updateProduct")
-	public Product updateProduct(@RequestBody Product pro,@RequestParam("id") Long id)
+	public Product updateProduct(@RequestBody Product pro)
 	{
-		return productService.updateProduct(pro, id); 
+		return productService.updateProduct(pro); 
 	}
 	
 	

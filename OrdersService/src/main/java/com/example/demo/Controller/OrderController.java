@@ -15,6 +15,7 @@ import com.example.demo.Service.OrderService;
 
 import jakarta.ws.rs.GET;
 
+import com.example.demo.Exceptions.ResourceNotFoundException;
 import com.example.demo.Repo.*;
 
 @RestController
@@ -46,7 +47,7 @@ public class OrderController {
 			orderService.addOrder(order);
 		}
 		else {
-			throw new RuntimeException("No enough Stock");
+			throw new ResourceNotFoundException("No enough Stock");
 		}
 		return "Order placed successfully";
 		
@@ -62,14 +63,14 @@ public class OrderController {
 	public Order getOrderBy(@RequestParam("id") Long id)
 	{
 		return orderService.getOrderBy(id)
-				.orElseThrow(()->new RuntimeException("No Order with the given ID"));
+				.orElseThrow(()->new ResourceNotFoundException("No Order with the given ID " + id));
 	}
 	
 	@DeleteMapping("/deleteOrder")
 	public String deleteOrder(@RequestParam("id") Long id)
 	{
 		Order order = orderService.getOrderBy(id)
-				.orElseThrow(()->new RuntimeException("No order with given Id"));
+				.orElseThrow(()->new ResourceNotFoundException("No order with given Id " + id));
 		restTemplate.postForObject("http://ProductService/updateQty?qty={qty}&id={id}",null, Integer.class,-order.getQuantity(),order.getProductId());
 		
 		orderService.deleteOrder(id);

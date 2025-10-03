@@ -50,13 +50,10 @@ public class ProductService {
 				.orElseThrow(()->new ResourceNotFoundException("Product not found with the id" + Id));
 	}
 	
-	public Product updateProduct(Product product,Long pid)
+	public Product updateProduct(Product product)
 	{
-		Product pro = productRepository.findById(pid)
-				.orElseThrow(()-> new  ResourceNotFoundException("Product not found with the given ID"));
-//		
-//		pro.setProductname(product.getProductname());
-//		pro.setQuantity(product.getQuantity());
+		Product pro = productRepository.findById(product.getId())
+				.orElseThrow(()-> new  ResourceNotFoundException("Product not found with the given ID" + product.getId()));
 		productRepository.save(product);
 		return pro;
 	}
