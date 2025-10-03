@@ -24,7 +24,6 @@ This project demonstrates microservices architecture, service-to-service communi
 - **Spring Data JPA**
 - **Spring Security**
 - **Spring Cloud Gateway (API Gateway)**
-- **JUnit & Mockito for testing**
 - **Gradle for build and dependency management**
 - **Database:** Configurable in `application.properties` (e.g., MySQL/Postgres)
 
