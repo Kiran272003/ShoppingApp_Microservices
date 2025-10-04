@@ -16,9 +16,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .addFilterBefore(new HeaderAuthenticationFilter(), org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
             .authorizeHttpRequests(auth -> auth
-                // Product endpoints
-                
-                // allow actuator or swagger if needed - adjust as required
+               
                 .anyRequest().permitAll()
             )
             .httpBasic(httpBasic -> httpBasic.disable()); // requests authenticated by header, no local basic

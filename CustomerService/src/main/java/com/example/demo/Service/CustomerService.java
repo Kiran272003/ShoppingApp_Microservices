@@ -10,45 +10,49 @@ import com.example.demo.Exceptions.BadRequestException;
 import com.example.demo.Exceptions.ResourceNotFoundException;
 import com.example.demo.Repo.*;
 
-@Service
+@Service // Marks this class as a Spring service component
 public class CustomerService {
 
-	@Autowired
-	private CustomerRepository customerRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
-	public List<Customer> getallCustomers() {
-		return customerRepository.findAll();
+    // ------------------------- Get all customers ------------------------
+    public List<Customer> getallCustomers() {
+        return customerRepository.findAll();
+    }
 
-	}
+    // ------------------------- Add a new customer ----------------------
+    public Customer addCustomer(Customer customer) {
+        if (customer.getName() == null || customer.getAddress()==null||customer.getCity()==null || customer.getEmail()==null||customer.getState()==null) {
+            throw new BadRequestException("Some fields are empty");
+        }
+        return customerRepository.save(customer);
+    }
 
-	public Customer addCustomer(Customer customer) {
-		if (customer == null) {
-			throw new BadRequestException("The Customer can not be Empty");
-		}
-		return customerRepository.save(customer);
-	}
+    // ------------------------- Get customer by ID ----------------------
+    public Optional<Customer> getById(Long id) {
+        Optional<Customer> customerOpt = customerRepository.findById(id);
+        if (customerOpt.isEmpty()) {
+            throw new ResourceNotFoundException("No Customer found with the given ID: " + id);
+        }
+        return customerOpt;
+    }
 
-	public Optional<Customer> getById(Long id) {
-		if (customerRepository.findById(id) == null) {
-			throw new ResourceNotFoundException("There is no Customer with the given ID : " + id);
-		}
-		return customerRepository.findById(id);
-	}
+    // ------------------------- Delete customer by ID -------------------
+    public void deleteById(Long id) {
+        Optional<Customer> customerOpt = customerRepository.findById(id);
+        if (customerOpt.isEmpty()) {
+            throw new ResourceNotFoundException("No Customer found to delete with the given ID: " + id);
+        }
+        customerRepository.deleteById(id);
+    }
 
-	public void deleteById(Long id) {
-		if (customerRepository.findById(id) == null) {
-			throw new ResourceNotFoundException("There is no Customer delete with the given ID : " + id);
-		}
-		customerRepository.deleteById(id);
-
-	}
-	
-	public Customer updateCustomer(Customer customer)
-	{
-		if(customer.getId()==null)
-		{
-			throw new ResourceNotFoundException("The Customer not found with the given ID" + customer.getId());
-		}
-		return customerRepository.save(customer);
-	}
+    // ------------------------- Update existing customer ----------------
+    public Customer updateCustomer(Customer customer) {
+        if (customer.getId() == null) {
+            throw new ResourceNotFoundException(
+                    "Cannot update Customer. ID not provided: " + customer.getId());
+        }
+        return customerRepository.save(customer);
+    }
 }

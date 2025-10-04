@@ -1,28 +1,42 @@
 package com.example.demo;
 
-import com.example.demo.HeaderAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.Customizer;
 
-@Configuration
+@Configuration // Marks this as a Spring Security configuration class
 public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+            // Disable CSRF since this is an API
             .csrf(csrf -> csrf.disable())
-            .addFilterBefore(new HeaderAuthenticationFilter(), org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
+
+            // Add custom filter that authenticates requests using headers from the gateway
+            .addFilterBefore(
+                new HeaderAuthenticationFilter(),
+                org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class
+            )
+
+            // Authorization rules for endpoints
             .authorizeHttpRequests(auth -> auth
-                // Product endpoints
-                .requestMatchers("/customer", "/addCustomer", "/getProducts","/deleteCustomer","/getById","/updateCustomer").hasAnyRole("USER","ADMIN")
-                .requestMatchers("/getMyOrders", "/placeOrder","/deleteOrder").hasRole("USER")
-                // allow actuator or swagger if needed - adjust as required
+                // Customer endpoints accessible to USER and ADMIN
+                .requestMatchers("/customer", "/addCustomer", "/getProducts",
+                                 "/deleteCustomer", "/getById", "/updateCustomer")
+                    .hasAnyRole("USER", "ADMIN")
+
+                // Order endpoints accessible only to USER
+                .requestMatchers("/getMyOrders", "/placeOrder", "/deleteOrder")
+                    .hasRole("USER")
+
+                // All other requests must be authenticated
                 .anyRequest().authenticated()
             )
-            .httpBasic(httpBasic -> httpBasic.disable()); // requests authenticated by header, no local basic
+
+            // Disable HTTP Basic login (auth handled via headers)
+            .httpBasic(httpBasic -> httpBasic.disable());
 
         return http.build();
     }

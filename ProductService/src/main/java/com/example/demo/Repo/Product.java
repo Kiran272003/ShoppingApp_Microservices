@@ -1,58 +1,70 @@
 package com.example.demo.Repo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+/**
+ * Entity class representing a Product in the system.
+ * <p>
+ * This class maps to the "Product" table in the database and 
+ * stores product-related information such as name, price, and available quantity.
+ * </p>
+ */
 @Entity
-@Table(name="Product")
+@Table(name = "Product")
 public class Product {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	@Column(name="ProductName")
-	private String productname;
-	@Column(name="Quantity")
-	private Integer quantity;
+    /** Unique identifier for each product (Primary Key) */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-	@Column(name="Price")
-	private int price;
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
-	public Product()
-	{
-		
-	}
-	public long getId() {
-		return id;
-	}
+    /** Name of the product */
+    @Column(name = "ProductName")
+    private String productname;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    /** Available stock quantity of the product */
+    @Column(name = "Quantity")
+    private Integer quantity;
 
-	public String getProductname() {
-		return productname;
-	}
+    /** Price per unit of the product */
+    @Column(name = "Price")
+    private int price;
 
-	public void setProductname(String productname) {
-		this.productname = productname;
-	}
+    /** Default constructor (required by JPA) */
+    public Product() {
+    }
 
-	public Integer getQuantity() {
-		return quantity;
-	}
+    // -------------------- Getters and Setters --------------------
 
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
+    public long getId() {
+        return id;
+    }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getProductname() {
+        return productname;
+    }
+
+    public void setProductname(String productname) {
+        this.productname = productname;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 }
