@@ -115,7 +115,7 @@ Each microservice can be started individually:
 
 
 ## 🔒 Security
-**OAuth**
+**Basic Auth**
 Configured via `SecurityConfig.java` in ProductService and other services.
 
 ---
